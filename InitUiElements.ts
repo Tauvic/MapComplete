@@ -1,6 +1,5 @@
 import {FixedUiElement} from "./UI/Base/FixedUiElement";
 import Toggle from "./UI/Input/Toggle";
-import {Basemap} from "./UI/BigComponents/Basemap";
 import State from "./State";
 import LoadFromOverpass from "./Logic/Actors/OverpassFeatureSource";
 import {UIEventSource} from "./Logic/UIEventSource";
@@ -14,8 +13,7 @@ import {LocalStorageSource} from "./Logic/Web/LocalStorageSource";
 import {Utils} from "./Utils";
 import Svg from "./Svg";
 import Link from "./UI/Base/Link";
-import * as personal from "./assets/themes/personal/personal.json"
-import LayoutConfig from "./Customizations/JSON/LayoutConfig";
+import * as personal from "./assets/themes/personal/personal.json";
 import * as L from "leaflet";
 import Img from "./UI/Base/Img";
 import UserDetails from "./Logic/Osm/OsmConnection";
@@ -30,14 +28,16 @@ import Translations from "./UI/i18n/Translations";
 import MapControlButton from "./UI/MapControlButton";
 import SelectedFeatureHandler from "./Logic/Actors/SelectedFeatureHandler";
 import LZString from "lz-string";
-import {LayoutConfigJson} from "./Customizations/JSON/LayoutConfigJson";
 import FeatureSource from "./Logic/FeatureSource/FeatureSource";
 import AllKnownLayers from "./Customizations/AllKnownLayers";
-import LayerConfig from "./Customizations/JSON/LayerConfig";
 import AvailableBaseLayers from "./Logic/Actors/AvailableBaseLayers";
 import {TagsFilter} from "./Logic/Tags/TagsFilter";
 import LeftControls from "./UI/BigComponents/LeftControls";
 import RightControls from "./UI/BigComponents/RightControls";
+import {LayoutConfigJson} from "./Models/ThemeConfig/Json/LayoutConfigJson";
+import LayoutConfig from "./Models/ThemeConfig/LayoutConfig";
+import LayerConfig from "./Models/ThemeConfig/LayerConfig";
+import Minimap from "./UI/Base/Minimap";
 
 export class InitUiElements {
     static InitAll(
@@ -154,16 +154,13 @@ export class InitUiElements {
             InitUiElements.InitWelcomeMessage();
         });
 
-        if (
-            (window != window.top && !State.state.featureSwitchWelcomeMessage.data) ||
-            State.state.featureSwitchIframe.data
-        ) {
+        if (State.state.featureSwitchIframe.data) {
             const currentLocation = State.state.locationControl;
-            const url = `${window.location.origin}${window.location.pathname}?z=${
-                currentLocation.data.zoom ?? 0
-            }&lat=${currentLocation.data.lat ?? 0}&lon=${
-                currentLocation.data.lon ?? 0
-            }`;
+            const url = `${window.location.origin}${
+                window.location.pathname
+            }?z=${currentLocation.data.zoom ?? 0}&lat=${
+                currentLocation.data.lat ?? 0
+            }&lon=${currentLocation.data.lon ?? 0}`;
             new MapControlButton(
                 new Link(Svg.pop_out_img, url, true).SetClass(
                     "block w-full h-full p-1.5"
@@ -178,14 +175,15 @@ export class InitUiElements {
                     "--subtle-detail-color"
                 );
                 const icon = L.icon({
-                    iconUrl: Img.AsData(Svg.home_white_bg.replace(/#ffffff/g, color)),
+                    iconUrl: Img.AsData(
+                        Svg.home_white_bg.replace(/#ffffff/g, color)
+                    ),
                     iconSize: [30, 30],
                     iconAnchor: [15, 15],
                 });
                 const marker = L.marker([home.lat, home.lon], {icon: icon});
                 marker.addTo(State.state.leafletMap.data);
             });
-
 
         if (layoutToUse.id === personal.id) {
             updateFavs();
@@ -226,7 +224,9 @@ export class InitUiElements {
                 "last-loaded-user-layout"
             );
             if (hash.length < 10) {
-                hash = dedicatedHashFromLocalStorage.data ?? hashFromLocalStorage.data;
+                hash =
+                    dedicatedHashFromLocalStorage.data ??
+                    hashFromLocalStorage.data;
             } else {
                 console.log("Saving hash to local storage");
                 hashFromLocalStorage.setData(hash);
@@ -273,9 +273,11 @@ export class InitUiElements {
         // ?-Button on Desktop, opens panel with close-X.
         const help = new MapControlButton(Svg.help_svg());
         help.onClick(() => isOpened.setData(true));
-        new Toggle(fullOptions.SetClass("welcomeMessage"), help, isOpened).AttachTo(
-            "messagesbox"
-        );
+        new Toggle(
+            fullOptions.SetClass("welcomeMessage"),
+            help,
+            isOpened
+        ).AttachTo("messagesbox");
         const openedTime = new Date().getTime();
         State.state.locationControl.addCallback(() => {
             if (new Date().getTime() - openedTime < 15 * 1000) {
@@ -332,14 +334,15 @@ export class InitUiElements {
             State.state.leafletMap
         );
 
-        const bm = new Basemap(
-            "leafletDiv",
-            State.state.locationControl,
-            State.state.backgroundLayer,
-            State.state.LastClickLocation,
-            attr
-        );
-        State.state.leafletMap.setData(bm.map);
+        new Minimap({
+            background: State.state.backgroundLayer,
+            location: State.state.locationControl,
+            leafletMap: State.state.leafletMap,
+            attribution: attr,
+            lastClickLocation: State.state.LastClickLocation
+        }).SetClass("w-full h-full")
+            .AttachTo("leafletDiv")
+
         const layout = State.state.layoutToUse.data;
         if (layout.lockLocation) {
             if (layout.lockLocation === true) {
@@ -358,8 +361,11 @@ export class InitUiElements {
                 ];
             }
             console.warn("Locking the bounds to ", layout.lockLocation);
-            bm.map.setMaxBounds(layout.lockLocation);
-            bm.map.setMinZoom(layout.startZoom);
+            State.state.leafletMap.addCallbackAndRunD(map => {
+                // @ts-ignore
+                map.setMaxBounds(layout.lockLocation);
+                map.setMinZoom(layout.startZoom);
+            })
         }
     }
 
@@ -381,7 +387,7 @@ export class InitUiElements {
                 const flayer = {
                     isDisplayed: isDisplayed,
                     layerDef: layer,
-                    appliedFilters: new UIEventSource<TagsFilter>(undefined)
+                    appliedFilters: new UIEventSource<TagsFilter>(undefined),
                 };
                 flayers.push(flayer);
             }
@@ -391,7 +397,9 @@ export class InitUiElements {
         const updater = new LoadFromOverpass(
             state.locationControl,
             state.layoutToUse,
-            state.leafletMap
+            state.leafletMap,
+            state.overpassUrl,
+            state.overpassTimeout
         );
         State.state.layerUpdater = updater;
 
@@ -418,7 +426,9 @@ export class InitUiElements {
             source,
             State.state.osmApiFeatureSource
         );
-        selectedFeatureHandler.zoomToSelectedFeature(State.state.locationControl);
+        selectedFeatureHandler.zoomToSelectedFeature(
+            State.state.locationControl
+        );
         return source;
     }
 

@@ -3,6 +3,14 @@
     "authors": [
       "Pieter Vander Vennet"
     ],
+    "path": "add_pin.svg",
+    "license": "CC0",
+    "sources": []
+  },
+  {
+    "authors": [
+      "Pieter Vander Vennet"
+    ],
     "path": "length-crosshair.svg",
     "license": "CC0",
     "sources": []
@@ -1322,5 +1330,35 @@
     "sources": [
       "https://commons.wikimedia.org/wiki/File:Media-floppy.svg"
     ]
+  },
+  {
+    "authors": [
+      "Pieter Vander Vennet"
+    ],
+    "path": "location-refused.svg",
+    "license": "CC0",
+    "sources": []
+  },
+  {
+    "authors": [
+      "Pieter Vander Vennet"
+    ],
+    "path": "location_locked.svg",
+    "license": "CC0",
+    "sources": []
+  },
+  {
+    "authors": [
+      "Pieter Vander Vennet"
+    ],
+    "path": "location_unlocked.svg",
+    "license": "CC0",
+    "sources": []
+  },
+  {
+    "authors": [],
+    "path": "loading.svg",
+    "license": "CC0; trivial",
+    "sources": []
   }
 ]

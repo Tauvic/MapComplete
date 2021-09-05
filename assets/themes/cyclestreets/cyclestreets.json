@@ -280,7 +280,7 @@
       "tagRenderings": [
         "images"
       ],
-      "allowSplit": true
+      "allowSplit": false
     }
   ]
 }

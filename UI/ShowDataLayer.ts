@@ -4,10 +4,10 @@
 import {UIEventSource} from "../Logic/UIEventSource";
 import * as L from "leaflet"
 import "leaflet.markercluster"
-import LayerConfig from "../Customizations/JSON/LayerConfig";
 import State from "../State";
 import FeatureInfoBox from "./Popup/FeatureInfoBox";
-import LayoutConfig from "../Customizations/JSON/LayoutConfig";
+import LayoutConfig from "../Models/ThemeConfig/LayoutConfig";
+import LayerConfig from "../Models/ThemeConfig/LayerConfig";
 
 
 export default class ShowDataLayer {
@@ -16,9 +16,9 @@ export default class ShowDataLayer {
     private readonly _leafletMap: UIEventSource<L.Map>;
     private _cleanCount = 0;
     private readonly _enablePopups: boolean;
-    private readonly _features: UIEventSource<{ feature: any}[]>
+    private readonly _features: UIEventSource<{ feature: any }[]>
 
-    constructor(features: UIEventSource<{ feature: any}[]>,
+    constructor(features: UIEventSource<{ feature: any }[]>,
                 leafletMap: UIEventSource<L.Map>,
                 layoutToUse: UIEventSource<LayoutConfig>,
                 enablePopups = true,
@@ -124,7 +124,9 @@ export default class ShowDataLayer {
                     console.error(e)
                 }
             }
-            State.state.selectedElement.ping()
+            if (self._enablePopups) {
+                State.state.selectedElement.ping()
+            }
         }
 
         features.addCallback(() => update());
@@ -145,13 +147,12 @@ export default class ShowDataLayer {
         // We have to convert them to the appropriate icon
         // Click handling is done in the next step
 
-        const tagSource = State.state.allElements.getEventSourceById(feature.properties.id)
         const layer: LayerConfig = this._layerDict[feature._matching_layer_id];
-
         if (layer === undefined) {
             return;
         }
 
+        const tagSource = feature.properties.id === undefined ? new UIEventSource<any>(feature.properties) : State.state.allElements.getEventSourceById(feature.properties.id)
         const style = layer.GenerateLeafletStyle(tagSource, !(layer.title === undefined && (layer.tagRenderings ?? []).length === 0));
         const baseElement = style.icon.html;
         if (!this._enablePopups) {
@@ -185,8 +186,8 @@ export default class ShowDataLayer {
             autoPan: true,
             closeOnEscapeKey: true,
             closeButton: false,
-            autoPanPaddingTopLeft: [15,15],
-            
+            autoPanPaddingTopLeft: [15, 15],
+
         }, leafletLayer);
 
         leafletLayer.bindPopup(popup);
@@ -230,7 +231,7 @@ export default class ShowDataLayer {
                 ) {
                     leafletLayer.openPopup()
                 }
-                if(feature.id !== feature.properties.id){
+                if (feature.id !== feature.properties.id) {
                     console.trace("Not opening the popup for", feature)
                 }
 

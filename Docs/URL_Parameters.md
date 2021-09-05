@@ -10,7 +10,7 @@ What is a URL parameter?
 URL-parameters are extra parts of the URL used to set the state.
 
 For example, if the url is `https://mapcomplete.osm.be/cyclofix?lat=51.0&lon=4.3&z=5&test=true#node/1234`,
-the URL-parameters are stated in the part between the `?` and the `#`. There are multiple, all seperated by `&`, namely:
+the URL-parameters are stated in the part between the `?` and the `#`. There are multiple, all separated by `&`, namely:
 
 - The url-parameter `lat` is `51.0` in this instance
 - The url-parameter `lon` is `4.3` in this instance
@@ -19,11 +19,15 @@ the URL-parameters are stated in the part between the `?` and the `#`. There are
 
 Finally, the URL-hash is the part after the `#`. It is `node/1234` in this case.
 
+ language
+----------
 
- layer-control-toggle 
-----------------------
+The language to display mapcomplete in. Will be ignored in case a logged-in-user did set their language before. If the specified language does not exist, it will default to the first language in the theme.
 
- Whether or not the layer control is shown The default value is _false_
+ download-control-toggle 
+-------------------------
+
+ Whether or not the download panel is shown The default value is _false_
 
 
  filter-toggle 
@@ -68,10 +72,10 @@ Finally, the URL-hash is the part after the `#`. It is `node/1234` in this case.
  Disables/Enables the search bar The default value is _true_
 
 
- fs-layers 
------------
+ fs-background 
+---------------
 
- Disables/Enables the layer control The default value is _true_
+ Disables/Enables the background layer control The default value is _true_
 
 
  fs-filter 
@@ -122,6 +126,18 @@ Finally, the URL-hash is the part after the `#`. It is `node/1234` in this case.
  Always show all questions The default value is _false_
 
 
+ fs-export 
+-----------
+
+ Enable the export as GeoJSON and CSV button The default value is _false_
+
+
+ fs-pdf 
+--------
+
+ Enable the PDF download button The default value is _false_
+
+
  test 
 ------
 
@@ -133,6 +149,17 @@ Finally, the URL-hash is the part after the `#`. It is `node/1234` in this case.
 
  If true, shows some extra debugging help such as all the available tags on every object The default value is _false_
 
+
+overpassUrl
+-------------
+
+Point mapcomplete to a different overpass-instance. Example: https://overpass-api.de/api/interpreter The default value is _https://overpass.kumi.de/api/interpreter_
+
+
+overpassTimeout
+-----------------
+
+Set a different timeout (in seconds) for queries in overpass The default value is _60_
 
  fake-user 
 -----------

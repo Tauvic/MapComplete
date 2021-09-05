@@ -115,6 +115,7 @@ export abstract class OsmObject {
                 const rels = data.elements.map(wayInfo => {
                     const rel = new OsmRelation(wayInfo.id)
                     rel.LoadData(wayInfo)
+                    rel.SaveExtraData(wayInfo)
                     return rel
                 })
                 relsSrc.setData(rels)
@@ -291,7 +292,7 @@ export abstract class OsmObject {
                 const element = data.elements.pop();
 
                 let nodes = []
-                if (data.elements.length > 2) {
+                if (self.type === "way" && data.elements.length >= 0) {
                     nodes = OsmObject.ParseObjects(data.elements)
                 }
 
@@ -444,8 +445,8 @@ export class OsmWay extends OsmObject {
             }
             const cp = node.centerpoint();
             this.coordinates.push(cp);
-            latSum = cp[0]
-            lonSum = cp[1]
+            latSum += cp[0]
+            lonSum += cp[1]
         }
         let count = this.coordinates.length;
         this.lat = latSum / count;
@@ -496,10 +497,13 @@ export class OsmRelation extends OsmObject {
         }
 
         let tags = this.TagsXML();
-        return '    <relation id="' + this.id + '" changeset="' + changesetId + '" ' + this.VersionXML() + '>\n' +
-            members +
-            tags +
-            '        </relation>\n';
+        let cs = ""
+        if(changesetId !== undefined){
+            cs = `changeset="${changesetId}"`
+        }
+        return `    <relation id="${this.id}" ${cs} ${this.VersionXML()}>
+${members}${tags}        </relation>
+`;
 
     }
 

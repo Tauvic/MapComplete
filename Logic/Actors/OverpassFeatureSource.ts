@@ -1,13 +1,13 @@
 import {UIEventSource} from "../UIEventSource";
 import Loc from "../../Models/Loc";
 import {Or} from "../Tags/Or";
-import LayoutConfig from "../../Customizations/JSON/LayoutConfig";
 import {Overpass} from "../Osm/Overpass";
 import Bounds from "../../Models/Bounds";
 import FeatureSource from "../FeatureSource/FeatureSource";
 import {Utils} from "../../Utils";
 import {TagsFilter} from "../Tags/TagsFilter";
 import SimpleMetaTagger from "../SimpleMetaTagger";
+import LayoutConfig from "../../Models/ThemeConfig/LayoutConfig";
 
 
 export default class OverpassFeatureSource implements FeatureSource {
@@ -35,6 +35,8 @@ export default class OverpassFeatureSource implements FeatureSource {
     private readonly _location: UIEventSource<Loc>;
     private readonly _layoutToUse: UIEventSource<LayoutConfig>;
     private readonly _leafletMap: UIEventSource<L.Map>;
+    private readonly _interpreterUrl: UIEventSource<string>;
+    private readonly _timeout: UIEventSource<number>;
 
     /**
      * The most important layer should go first, as that one gets first pick for the questions
@@ -42,10 +44,14 @@ export default class OverpassFeatureSource implements FeatureSource {
     constructor(
         location: UIEventSource<Loc>,
         layoutToUse: UIEventSource<LayoutConfig>,
-        leafletMap: UIEventSource<L.Map>) {
+        leafletMap: UIEventSource<L.Map>,
+        interpreterUrl: UIEventSource<string>,
+        timeout: UIEventSource<number>,) {
         this._location = location;
         this._layoutToUse = layoutToUse;
         this._leafletMap = leafletMap;
+        this._interpreterUrl = interpreterUrl;
+        this._timeout = timeout;
         const self = this;
 
         this.sufficientlyZoomed = location.map(location => {
@@ -67,6 +73,9 @@ export default class OverpassFeatureSource implements FeatureSource {
         location.addCallback(() => {
             self.update()
         });
+        leafletMap.addCallbackAndRunD(_ => {
+            self.update();
+        })
     }
 
     public ForceRefresh() {
@@ -123,7 +132,7 @@ export default class OverpassFeatureSource implements FeatureSource {
         if (filters.length + extraScripts.length === 0) {
             return undefined;
         }
-        return new Overpass(new Or(filters), extraScripts);
+        return new Overpass(new Or(filters), extraScripts, this._interpreterUrl, this._timeout);
     }
 
     private update(): void {
@@ -137,7 +146,11 @@ export default class OverpassFeatureSource implements FeatureSource {
             return;
         }
 
-        const bounds = this._leafletMap.data.getBounds();
+        const bounds = this._leafletMap.data?.getBounds();
+        if(bounds === undefined){
+            console.log("Leaflet map not yet initialized; retrying later")
+            return;
+        }
 
         const diff = this._layoutToUse.data.widenFactor;
 

@@ -1,5 +1,8 @@
 {
     "undefined": {
+        "phone": {
+            "question": "Nomor telepon dari {name|?"
+        },
         "email": {
             "question": "Apa alamat surel dari {name}?"
         },

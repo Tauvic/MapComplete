@@ -1,6 +1,5 @@
 import {VariableUiElement} from "../Base/VariableUIElement";
 import {Translation} from "../i18n/Translation";
-import LayoutConfig from "../../Customizations/JSON/LayoutConfig";
 import Svg from "../../Svg";
 import Combine from "../Base/Combine";
 import {SubtleButton} from "../Base/SubtleButton";
@@ -11,8 +10,9 @@ import Toggle from "../Input/Toggle";
 import {FixedUiElement} from "../Base/FixedUiElement";
 import Translations from "../i18n/Translations";
 import Constants from "../../Models/Constants";
-import LayerConfig from "../../Customizations/JSON/LayerConfig";
 import BaseUIElement from "../BaseUIElement";
+import LayoutConfig from "../../Models/ThemeConfig/LayoutConfig";
+import LayerConfig from "../../Models/ThemeConfig/LayerConfig";
 
 export default class ShareScreen extends Combine {
 
@@ -172,7 +172,7 @@ export default class ShareScreen extends Combine {
         const iframeCode = new VariableUiElement(
             url.map((url) => {
                 return `<span class='literal-code iframe-code-block'>
-                         &lt;iframe src="${url}" width="100%" height="100%" style="min-width: 25Opx; min-height: 250ox" title="${layout.title?.txt ?? "MapComplete"} with MapComplete"&gt;&lt;/iframe&gt 
+                         &lt;iframe src="${url}" allow="geolocation" width="100%" height="100%" style="min-width: 25Opx; min-height: 250ox" title="${layout.title?.txt ?? "MapComplete"} with MapComplete"&gt;&lt;/iframe&gt 
                     </span>`
             })
         );

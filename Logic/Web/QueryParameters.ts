@@ -10,6 +10,7 @@ import Combine from "../../UI/Base/Combine";
 export class QueryParameters {
 
     private static order: string [] = ["layout", "test", "z", "lat", "lon"];
+    private static _wasInitialized: Set<string> = new Set()
     private static knownSources = {};
     private static initialized = false;
     private static defaults = {}
@@ -27,7 +28,7 @@ export class QueryParameters {
         "URL-parameters are extra parts of the URL used to set the state.\n" +
         "\n" +
         "For example, if the url is `https://mapcomplete.osm.be/cyclofix?lat=51.0&lon=4.3&z=5&test=true#node/1234`,\n" +
-        "the URL-parameters are stated in the part between the `?` and the `#`. There are multiple, all seperated by `&`, namely:\n" +
+        "the URL-parameters are stated in the part between the `?` and the `#`. There are multiple, all separated by `&`, namely:\n" +
         "\n" +
         "- The url-parameter `lat` is `51.0` in this instance\n" +
         "- The url-parameter `lon` is `4.3` in this instance\n" +
@@ -91,6 +92,7 @@ export class QueryParameters {
                 const kv = param.split("=");
                 const key = decodeURIComponent(kv[0]);
                 QueryParameters.addOrder(key)
+                QueryParameters._wasInitialized.add(key)
                 const v = decodeURIComponent(kv[1]);
                 const source = new UIEventSource<string>(v);
                 source.addCallback(() => QueryParameters.Serialize())
@@ -101,6 +103,10 @@ export class QueryParameters {
         window["mapcomplete_query_parameter_overview"] = () => {
             console.log(QueryParameters.GenerateQueryParameterDocs())
         }
+    }
+    
+    public static wasInitialized(key: string) : boolean{
+        return QueryParameters._wasInitialized.has(key)
     }
 
     private static Serialize() {

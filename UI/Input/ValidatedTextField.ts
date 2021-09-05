@@ -11,10 +11,10 @@ import DirectionInput from "./DirectionInput";
 import ColorPicker from "./ColorPicker";
 import {Utils} from "../../Utils";
 import Loc from "../../Models/Loc";
-import {Unit} from "../../Customizations/JSON/Denomination";
 import BaseUIElement from "../BaseUIElement";
 import LengthInput from "./LengthInput";
 import {GeoOperations} from "../../Logic/GeoOperations";
+import {Unit} from "../../Models/Unit";
 
 interface TextFieldDef {
     name: string,
@@ -95,7 +95,7 @@ export default class ValidatedTextField {
                     )
                 }
                 const di = new DirectionInput(options.mapBackgroundLayer, location, value)
-                di.SetStyle("height: 20rem;");
+                di.SetStyle("max-width: 25rem;");
 
                 return di;
             },
@@ -103,7 +103,7 @@ export default class ValidatedTextField {
         ),
         ValidatedTextField.tp(
             "length",
-            "A geographical length in meters (rounded at two points). Will give an extra minimap with a measurement tool. Arguments: [ zoomlevel, preferredBackgroundMapType (comma seperated) ], e.g. `[\"21\", \"map,photo\"]",
+            "A geographical length in meters (rounded at two points). Will give an extra minimap with a measurement tool. Arguments: [ zoomlevel, preferredBackgroundMapType (comma separated) ], e.g. `[\"21\", \"map,photo\"]",
             (str) => {
                 const t = Number(str)
                 return !isNaN(t)
@@ -120,13 +120,12 @@ export default class ValidatedTextField {
                 }
                 
                 // Bit of a hack: we project the centerpoint to the closes point on the road - if available
-                if(options.feature){
+                if(options.feature !== undefined && options.feature.geometry.type !== "Point"){
                     const lonlat: [number, number] = [...options.location]
                     lonlat.reverse()
                     options.location = <[number,number]> GeoOperations.nearestPoint(options.feature, lonlat).geometry.coordinates
                     options.location.reverse()
                 }
-                options.feature
                 
                 const location = new UIEventSource<Loc>({
                     lat: options.location[0],
@@ -142,7 +141,8 @@ export default class ValidatedTextField {
                 const li = new LengthInput(options.mapBackgroundLayer, location, value)
                 li.SetStyle("height: 20rem;")
                 return li;
-            }
+            },
+            "decimal"
         ),
         ValidatedTextField.tp(
             "wikidata",
@@ -171,7 +171,7 @@ export default class ValidatedTextField {
                 str = "" + str;
                 return str !== undefined && str.indexOf(".") < 0 && !isNaN(Number(str))
             },
-            undefined,
+            str => "" + Number(str),
             undefined,
             "numeric"),
         ValidatedTextField.tp(
@@ -181,7 +181,7 @@ export default class ValidatedTextField {
                 str = "" + str;
                 return str !== undefined && str.indexOf(".") < 0 && !isNaN(Number(str)) && Number(str) >= 0
             },
-            undefined,
+            str => "" + Number(str),
             undefined,
             "numeric"),
         ValidatedTextField.tp(
@@ -191,21 +191,21 @@ export default class ValidatedTextField {
                 str = "" + str;
                 return str !== undefined && str.indexOf(".") < 0 && !isNaN(Number(str)) && Number(str) > 0
             },
-            undefined,
+            str => "" + Number(str),
             undefined,
             "numeric"),
         ValidatedTextField.tp(
             "float",
             "A decimal",
             (str) => !isNaN(Number(str)),
-            undefined,
+            str => "" + Number(str),
             undefined,
             "decimal"),
         ValidatedTextField.tp(
             "pfloat",
             "A positive decimal (incl zero)",
             (str) => !isNaN(Number(str)) && Number(str) >= 0,
-            undefined,
+            str => "" + Number(str),
             undefined,
             "decimal"),
         ValidatedTextField.tp(

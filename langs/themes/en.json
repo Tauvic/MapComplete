@@ -328,39 +328,7 @@
     "charging_stations": {
         "title": "Charging stations",
         "shortDescription": "A worldwide map of charging stations",
-        "description": "On this open map, one can find and mark information about charging stations",
-        "layers": {
-            "0": {
-                "name": "Charging stations",
-                "title": {
-                    "render": "Charging station"
-                },
-                "description": "A charging station",
-                "tagRenderings": {
-                    "5": {
-                        "question": "When is this charging station opened?"
-                    },
-                    "6": {
-                        "render": "{network}",
-                        "question": "What network of this charging station under?",
-                        "mappings": {
-                            "0": {
-                                "then": "Not part of a bigger network"
-                            },
-                            "1": {
-                                "then": "AeroVironment"
-                            },
-                            "2": {
-                                "then": "Blink"
-                            },
-                            "3": {
-                                "then": "eVgo"
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        "description": "On this open map, one can find and mark information about charging stations"
     },
     "climbing": {
         "title": "Open Climbing Map",
@@ -692,517 +660,22 @@
             }
         }
     },
-    "cycle_infra": {
-        "title": "Bicycle infrastructure",
-        "shortDescription": "A map where you can view and edit things related to the bicycle infrastructure.",
-        "description": "A map where you can view and edit things related to the bicycle infrastructure. Made during #osoc21.",
+    "cycle_highways": {
+        "title": "Cycle highways",
+        "description": "This map shows cycle highways",
         "layers": {
             "0": {
-                "name": "Cycleways",
+                "name": "cycle highways",
                 "title": {
-                    "render": "Cycleways",
-                    "mappings": {
-                        "0": {
-                            "then": "Bike road"
-                        },
-                        "1": {
-                            "then": "Shared lane"
-                        },
-                        "2": {
-                            "then": "Bike lane"
-                        },
-                        "3": {
-                            "then": "Bike road next to the road"
-                        },
-                        "4": {
-                            "then": "Cyclestreet"
-                        }
-                    }
-                },
-                "tagRenderings": {
-                    "0": {
-                        "question": "What kind of cycleway is there?",
-                        "mappings": {
-                            "0": {
-                                "then": "There is a shared lane"
-                            },
-                            "1": {
-                                "then": "There is a lane next to the road (seperated with paint)"
-                            },
-                            "2": {
-                                "then": "There is a track, but no cycleway drawn seperately from this road on the map."
-                            },
-                            "3": {
-                                "then": "There is a seperately drawn cycleway"
-                            },
-                            "4": {
-                                "then": "There is no cycleway"
-                            },
-                            "5": {
-                                "then": "There is no cycleway"
-                            }
-                        }
-                    },
-                    "1": {
-                        "question": "Is this street lit?",
-                        "mappings": {
-                            "0": {
-                                "then": "This street is lit"
-                            },
-                            "1": {
-                                "then": "This road is not lit"
-                            },
-                            "2": {
-                                "then": "This road is lit at night"
-                            },
-                            "3": {
-                                "then": "This road is lit 24/7"
-                            }
-                        }
-                    },
-                    "2": {
-                        "question": "Is this a cyclestreet?",
-                        "mappings": {
-                            "0": {
-                                "then": "This is a cyclestreet, and a 30km/h zone."
-                            },
-                            "1": {
-                                "then": "This is a cyclestreet"
-                            },
-                            "2": {
-                                "then": "This is not a cyclestreet."
-                            }
-                        }
-                    },
-                    "3": {
-                        "render": "The maximum speed on this road is {maxspeed} km/h",
-                        "mappings": {
-                            "0": {
-                                "then": "The maximum speed is 20 km/h"
-                            },
-                            "1": {
-                                "then": "The maximum speed is 30 km/h"
-                            },
-                            "2": {
-                                "then": "The maximum speed is 50 km/h"
-                            },
-                            "3": {
-                                "then": "The maximum speed is 70 km/h"
-                            },
-                            "4": {
-                                "then": "The maximum speed is 90 km/h"
-                            }
-                        },
-                        "question": "What is the maximum speed in this street?"
-                    },
-                    "4": {
-                        "render": "This cyleway is made of {cycleway:surface}",
-                        "mappings": {
-                            "0": {
-                                "then": "This cycleway is made of wood"
-                            },
-                            "1": {
-                                "then": "This cycleway is made of concrete"
-                            },
-                            "2": {
-                                "then": "This cycleway is made of cobblestone"
-                            },
-                            "3": {
-                                "then": "This cycleway is made of asphalt"
-                            },
-                            "4": {
-                                "then": "This cycleway is paved"
-                            },
-                            "5": {
-                                "then": "This cycleway is paved with stones with a flat top"
-                            },
-                            "6": {
-                                "then": "This cycleway is made of gravel"
-                            },
-                            "7": {
-                                "then": "This cycleway is unhardened"
-                            },
-                            "8": {
-                                "then": "This cycleway is made of gravel"
-                            },
-                            "9": {
-                                "then": "This cycleway is made of fine gravel"
-                            },
-                            "10": {
-                                "then": "This cycleway is made of pebblestone"
-                            },
-                            "11": {
-                                "then": "This cycleway is made from raw ground"
-                            }
-                        },
-                        "question": "What is the surface of the cycleway made from?"
-                    },
-                    "5": {
-                        "question": "What is the smoothness of this cycleway?",
-                        "mappings": {
-                            "0": {
-                                "then": "Usable for thin rollers: rollerblade, skateboard"
-                            },
-                            "1": {
-                                "then": "Usable for thin wheels: racing bike"
-                            },
-                            "2": {
-                                "then": "Usable for normal wheels: city bike, wheelchair, scooter"
-                            },
-                            "3": {
-                                "then": "Usable for robust wheels: trekking bike, car, rickshaw"
-                            },
-                            "4": {
-                                "then": "Usable for vehicles with high clearance: light duty off-road vehicle"
-                            },
-                            "5": {
-                                "then": "Usable for off-road vehicles: heavy duty off-road vehicle"
-                            },
-                            "6": {
-                                "then": "Usable for specialized off-road vehicles: tractor, ATV"
-                            },
-                            "7": {
-                                "then": "Impassable / No wheeled vehicle"
-                            }
-                        }
-                    },
-                    "6": {
-                        "render": "This road is made of {surface}",
-                        "mappings": {
-                            "0": {
-                                "then": "This street is made of wood"
-                            },
-                            "1": {
-                                "then": "This street is made of concrete"
-                            },
-                            "2": {
-                                "then": "This street is made of cobblestone"
-                            },
-                            "3": {
-                                "then": "This street is made of asphalt"
-                            },
-                            "4": {
-                                "then": "This street is paved"
-                            },
-                            "5": {
-                                "then": "This street is made from fine gravel"
-                            },
-                            "6": {
-                                "then": "This street is made from cobblestone"
-                            },
-                            "7": {
-                                "then": "This street is made from paving stones"
-                            }
-                        },
-                        "question": "What is the surface of the street made from?"
-                    },
-                    "7": {
-                        "question": "What is the smoothness of this street?",
-                        "mappings": {
-                            "0": {
-                                "then": "Usable for thin rollers: rollerblade, skateboard"
-                            },
-                            "1": {
-                                "then": "Usable for thin wheels: racing bike"
-                            },
-                            "2": {
-                                "then": "Usable for normal wheels: city bike, wheelchair, scooter"
-                            },
-                            "3": {
-                                "then": "Usable for robust wheels: trekking bike, car, rickshaw"
-                            },
-                            "4": {
-                                "then": "Usable for vehicles with high clearance: light duty off-road vehicle"
-                            },
-                            "5": {
-                                "then": "Usable for off-road vehicles: heavy duty off-road vehicle"
-                            },
-                            "6": {
-                                "then": "Usable for specialized off-road vehicles: tractor, ATV"
-                            },
-                            "7": {
-                                "then": "Impassable / No wheeled vehicle"
-                            }
-                        }
-                    },
-                    "8": {
-                        "render": "The carriage width of this road is <strong>{width:carriageway}m</strong>",
-                        "question": "What is the carriage width of this road (in meters)?"
-                    },
-                    "9": {
-                        "question": "What traffic sign does this cycleway have?",
-                        "mappings": {
-                            "0": {
-                                "then": "Compulsory cycleway <img src='./assets/themes/cycle_infra/Belgian_road_sign_D07.svg' style='width: 3em'>"
-                            },
-                            "1": {
-                                "then": "Compulsory cycleway (with supplementary sign)<img src='./assets/themes/cycle_infra/Belgian_road_sign_D07.svg' style='width: 3em'> "
-                            },
-                            "2": {
-                                "then": "Segregated foot/cycleway <img src='./assets/themes/cycle_infra/Belgian_road_sign_D09.svg' style='width: 3em'>"
-                            },
-                            "3": {
-                                "then": "Unsegregated foot/cycleway <img src='./assets/themes/cycle_infra/Belgian_road_sign_D10.svg' style='width: 3em'>"
-                            },
-                            "4": {
-                                "then": "No traffic sign present"
-                            }
-                        }
-                    },
-                    "10": {
-                        "question": "What traffic sign does this cycleway have?",
-                        "mappings": {
-                            "0": {
-                                "then": "Compulsory cycleway <img src='./assets/themes/cycle_infra/Belgian_road_sign_D07.svg' style='width: 3em'>"
-                            },
-                            "1": {
-                                "then": "Compulsory cycleway (with supplementary sign)<img src='./assets/themes/cycle_infra/Belgian_road_sign_D07.svg' style='width: 3em'> "
-                            },
-                            "2": {
-                                "then": "Segregated foot/cycleway <img src='./assets/themes/cycle_infra/Belgian_road_sign_D09.svg' style='width: 3em'>"
-                            },
-                            "3": {
-                                "then": "Unsegregated foot/cycleway <img src='./assets/themes/cycle_infra/Belgian_road_sign_D10.svg' style='width: 3em'>"
-                            },
-                            "4": {
-                                "then": "No traffic sign present"
-                            }
-                        }
-                    },
-                    "11": {
-                        "question": "Does the traffic sign D7 (<img src='./assets/themes/cycle_infra/Belgian_road_sign_D07.svg' style='width: 1.5em'>) have a supplementary sign?",
-                        "mappings": {
-                            "0": {
-                                "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M6.svg' style='width: 3em'>"
-                            },
-                            "1": {
-                                "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M13.svg' style='width: 3em'>"
-                            },
-                            "2": {
-                                "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M14.svg' style='width: 3em'>"
-                            },
-                            "3": {
-                                "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M7.svg' style='width: 3em'>"
-                            },
-                            "4": {
-                                "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M15.svg' style='width: 3em'>"
-                            },
-                            "5": {
-                                "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M16.svg' style='width: 3em'>"
-                            },
-                            "6": {
-                                "then": "No supplementary traffic sign present"
-                            }
-                        }
-                    },
-                    "12": {
-                        "question": "Does the traffic sign D7 (<img src='./assets/themes/cycle_infra/Belgian_road_sign_D07.svg' style='width: 1.5em'>) have a supplementary sign?",
-                        "mappings": {
-                            "0": {
-                                "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M6.svg' style='width: 3em'>"
-                            },
-                            "1": {
-                                "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M13.svg' style='width: 3em'>"
-                            },
-                            "2": {
-                                "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M14.svg' style='width: 3em'>"
-                            },
-                            "3": {
-                                "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M7.svg' style='width: 3em'>"
-                            },
-                            "4": {
-                                "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M15.svg' style='width: 3em'>"
-                            },
-                            "5": {
-                                "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M16.svg' style='width: 3em'>"
-                            },
-                            "6": {
-                                "then": "No supplementary traffic sign present"
-                            }
-                        }
-                    },
-                    "13": {
-                        "render": "The buffer besides this cycleway is {cycleway:buffer} m",
-                        "question": "How wide is the gap between the cycleway and the road?"
-                    },
-                    "14": {
-                        "question": "How is this cycleway seperated from the road?",
-                        "mappings": {
-                            "0": {
-                                "then": "This cycleway is seperated by a dashed line"
-                            },
-                            "1": {
-                                "then": "This cycleway is seperated by a solid line"
-                            },
-                            "2": {
-                                "then": "This cycleway is seperated by a parking lane"
-                            },
-                            "3": {
-                                "then": "This cycleway is seperated by a kerb"
-                            }
-                        }
-                    },
-                    "15": {
-                        "question": "How is this cycleway seperated from the road?",
-                        "mappings": {
-                            "0": {
-                                "then": "This cycleway is seperated by a dashed line"
-                            },
-                            "1": {
-                                "then": "This cycleway is seperated by a solid line"
-                            },
-                            "2": {
-                                "then": "This cycleway is seperated by a parking lane"
-                            },
-                            "3": {
-                                "then": "This cycleway is seperated by a kerb"
-                            }
-                        }
-                    }
-                }
-            },
-            "1": {
-                "name": "All streets",
-                "description": "Layer to mark new cycleways",
-                "title": {
-                    "render": "Street"
-                },
-                "tagRenderings": {
-                    "0": {
-                        "question": "Is there a cycleway?",
-                        "mappings": {
-                            "0": {
-                                "then": "There is a shared lane"
-                            },
-                            "1": {
-                                "then": "There is a lane next to the road (seperated with paint)"
-                            },
-                            "2": {
-                                "then": "There is a track, but no cycleway drawn seperately from this road on the map."
-                            },
-                            "3": {
-                                "then": "There is a seperately drawn cycleway"
-                            },
-                            "4": {
-                                "then": "There is no cycleway known here"
-                            },
-                            "5": {
-                                "then": "There is no cycleway"
-                            },
-                            "6": {
-                                "then": "There is no cycleway"
-                            }
-                        },
-                        "render": "Unknown cycleway situation"
-                    },
-                    "1": {
-                        "question": "Is this a cyclestreet?",
-                        "mappings": {
-                            "0": {
-                                "then": "This is a cyclestreet, and a 30km/h zone."
-                            },
-                            "1": {
-                                "then": "This is a cyclestreet"
-                            },
-                            "2": {
-                                "then": "This is not a cyclestreet."
-                            }
-                        }
-                    }
-                }
-            },
-            "2": {
-                "name": "Barriers",
-                "description": "Obstacles while cycling, such as bollards and cycle barriers",
-                "title": {
-                    "render": "Barrier",
-                    "mappings": {
-                        "0": {
-                            "then": "Bollard"
-                        },
-                        "1": {
-                            "then": "Cycling Barrier"
-                        }
-                    }
-                },
-                "presets": {
-                    "0": {
-                        "title": "Bollard",
-                        "description": "A bollard in the road"
-                    },
-                    "1": {
-                        "title": "Cycle barrier",
-                        "description": "Cycle barrier, slowing down cyclists"
-                    }
-                },
-                "tagRenderings": {
-                    "0": {
-                        "question": "Can a bicycle go past this barrier?",
-                        "mappings": {
-                            "0": {
-                                "then": "A cyclist can go past this."
-                            },
-                            "1": {
-                                "then": "A cyclist can not go past this."
-                            }
-                        }
-                    },
-                    "1": {
-                        "question": "What kind of bollard is this?",
-                        "mappings": {
-                            "0": {
-                                "then": "Removable bollard"
-                            },
-                            "1": {
-                                "then": "Fixed bollard"
-                            },
-                            "2": {
-                                "then": "Bollard that can be folded down"
-                            },
-                            "3": {
-                                "then": "Flexible bollard, usually plastic"
-                            },
-                            "4": {
-                                "then": "Rising bollard"
-                            }
-                        }
-                    },
-                    "2": {
-                        "question": "What kind of cycling barrier is this?",
-                        "mappings": {
-                            "0": {
-                                "then": "Single, just two barriers with a space inbetween <img src='./assets/themes/cycle_infra/Cycle_barrier_single.png' style='width:8em'>"
-                            },
-                            "1": {
-                                "then": "Double, two barriers behind each other <img src='./assets/themes/cycle_infra/Cycle_barrier_double.png' style='width:8em'>"
-                            },
-                            "2": {
-                                "then": "Triple, three barriers behind each other <img src='./assets/themes/cycle_infra/Cycle_barrier_triple.png' style='width:8em'>"
-                            },
-                            "3": {
-                                "then": "Squeeze gate, gap is smaller at top, than at the bottom <img src='./assets/themes/cycle_infra/Cycle_barrier_squeeze.png' style='width:8em'>"
-                            }
-                        }
-                    },
-                    "3": {
-                        "render": "Maximum width: {maxwidth:physical} m",
-                        "question": "How wide is the gap left over besides the barrier?"
-                    },
-                    "4": {
-                        "render": "Space between barriers (along the length of the road): {width:seperation} m",
-                        "question": "How much space is there between the barriers (along the length of the road)?"
-                    },
-                    "5": {
-                        "render": "Width of opening: {width:opening} m",
-                        "question": "How wide is the smallest opening next to the barriers?"
-                    },
-                    "6": {
-                        "render": "Overlap: {overlap} m",
-                        "question": "How much overlap do the barriers have?"
-                    }
+                    "render": "cycle highway"
                 }
             }
         }
+    },
+    "cycle_infra": {
+        "title": "Bicycle infrastructure",
+        "shortDescription": "A map where you can view and edit things related to the bicycle infrastructure.",
+        "description": "A map where you can view and edit things related to the bicycle infrastructure. Made during #osoc21."
     },
     "cyclestreets": {
         "title": "Cyclestreets",
@@ -1290,7 +763,7 @@
                                 "then": "The garden is in partial shade"
                             },
                             "2": {
-                                "then": "The sun is in the shade"
+                                "then": "The garden is in the shade"
                             }
                         },
                         "question": "Is the garden shaded or sunny?"
@@ -1352,6 +825,9 @@
             }
         }
     },
+    "food": {
+        "title": "Restaurants and fast food"
+    },
     "fritures": {
         "layers": {
             "0": {
@@ -1387,6 +863,83 @@
     "ghostbikes": {
         "title": "Ghost bikes",
         "description": "A <b>ghost bike</b> is a memorial for a cyclist who died in a traffic accident, in the form of a white bicycle placed permanently near the accident location.<br/><br/>On this map, one can see all the ghost bikes which are known by OpenStreetMap. Is a ghost bike missing? Everyone can add or update information here - you only need to have a (free) OpenStreetMap account."
+    },
+    "hackerspaces": {
+        "title": "Hackerspaces",
+        "shortDescription": "A map of hackerspaces",
+        "description": "On this map you can see hackerspaces, add a new hackerspace or update data directly",
+        "layers": {
+            "0": {
+                "name": "Hackerspace",
+                "title": {
+                    "render": "Hackerspace",
+                    "mappings": {
+                        "0": {
+                            "then": " {name}"
+                        }
+                    }
+                },
+                "description": "Hackerspace",
+                "tagRenderings": {
+                    "0": {
+                        "question": "Is this a hackerspace or a makerspace?",
+                        "mappings": {
+                            "0": {
+                                "then": "This is a makerspace"
+                            },
+                            "1": {
+                                "then": "This is a traditional (software oriented) hackerspace"
+                            }
+                        }
+                    },
+                    "1": {
+                        "question": "What is the name of this hackerspace?",
+                        "render": "This hackerspace is named <b>{name}</b>"
+                    },
+                    "5": {
+                        "question": "When is this hackerspace opened?",
+                        "render": "{opening_hours_table()}",
+                        "mappings": {
+                            "0": {
+                                "then": "Opened 24/7"
+                            }
+                        }
+                    },
+                    "7": {
+                        "question": "Does this hackerspace serve Club Mate?",
+                        "mappings": {
+                            "0": {
+                                "then": "This hackerspace serves club mate"
+                            },
+                            "1": {
+                                "then": "This hackerspace is not worthy of the name hackerspace as it does not serve club mate"
+                            }
+                        }
+                    },
+                    "8": {
+                        "render": "This hackerspace was founded at {start_date}",
+                        "question": "When was this hackerspace founded?"
+                    }
+                },
+                "icon": {
+                    "mappings": {
+                        "0": {
+                            "then": "./assets/themes/hackerspaces/led.png"
+                        }
+                    }
+                },
+                "presets": {
+                    "0": {
+                        "title": "Hackerspace",
+                        "description": "A hackerspace is an area where people interested in software gather"
+                    },
+                    "1": {
+                        "title": "Makerspace",
+                        "description": "A makerspace is a place where DIY-enthusiasts gather to experiment with electronics such as arduino, LEDstrips, ..."
+                    }
+                }
+            }
+        }
     },
     "hailhydrant": {
         "title": "Hydrants, Extinguishers, Fire stations, and Ambulance stations.",
@@ -1774,11 +1327,6 @@
         "title": "Open Toilet Map",
         "description": "A map of public toilets"
     },
-    "trails": {
-        "title": "Trails",
-        "shortDescription": "This map shows trails",
-        "description": "This map shows trails"
-    },
     "trees": {
         "title": "Trees",
         "shortDescription": "Map all the trees",
@@ -1786,8 +1334,8 @@
     },
     "waste_basket": {
         "title": "Waste Basket",
-        "shortDescription": "Throw away waste",
-        "description": "This is a public waste basket, thrash can, where you can throw away your thrash.",
+        "shortDescription": "A map with waste baskets",
+        "description": "On this map, you'll find waste baskets near you. If a waste basket is missing on this map, you can add it yourself",
         "layers": {
             "0": {
                 "name": "Waste Basket",
@@ -1804,8 +1352,7 @@
                 },
                 "presets": {
                     "0": {
-                        "title": "Waste Basket",
-                        "description": "Throw away waste"
+                        "title": "Waste Basket"
                     }
                 }
             }

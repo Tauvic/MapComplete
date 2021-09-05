@@ -1,4 +1,94 @@
 {
+    "barrier": {
+        "name": "Barrières",
+        "description": "Hindernissen tijdens het fietsen, zoals paaltjes en fietshekjes",
+        "title": {
+            "render": "Barrière",
+            "mappings": {
+                "0": {
+                    "then": "Paaltje"
+                },
+                "1": {
+                    "then": "Fietshekjes"
+                }
+            }
+        },
+        "presets": {
+            "0": {
+                "title": "Paaltje",
+                "description": "Een paaltje in de weg"
+            },
+            "1": {
+                "title": "Fietshekjes",
+                "description": "Fietshekjes, voor het afremmen van fietsers"
+            }
+        },
+        "tagRenderings": {
+            "0": {
+                "question": "Kan een fietser langs deze barrière?",
+                "mappings": {
+                    "0": {
+                        "then": "Een fietser kan hier langs."
+                    },
+                    "1": {
+                        "then": "Een fietser kan hier niet langs."
+                    }
+                }
+            },
+            "1": {
+                "question": "Wat voor soort paal is dit?",
+                "mappings": {
+                    "0": {
+                        "then": "Verwijderbare paal"
+                    },
+                    "1": {
+                        "then": "Vaste paal"
+                    },
+                    "2": {
+                        "then": "Paal die platgevouwen kan worden"
+                    },
+                    "3": {
+                        "then": "Flexibele paal, meestal plastic"
+                    },
+                    "4": {
+                        "then": "Verzonken poller"
+                    }
+                }
+            },
+            "2": {
+                "question": "Wat voor fietshekjes zijn dit?",
+                "mappings": {
+                    "0": {
+                        "then": "Enkelvoudig, slechts twee hekjes met ruimte ertussen <img src='./assets/themes/cycle_infra/Cycle_barrier_single.png' style='width:8em'>"
+                    },
+                    "1": {
+                        "then": "Dubbel, twee hekjes achter elkaar <img src='./assets/themes/cycle_infra/Cycle_barrier_double.png' style='width:8em'>"
+                    },
+                    "2": {
+                        "then": "Drievoudig, drie hekjes achter elkaar <img src='./assets/themes/cycle_infra/Cycle_barrier_triple.png' style='width:8em'>"
+                    },
+                    "3": {
+                        "then": "Knijppoort, ruimte is smaller aan de top, dan aan de bodem <img src='./assets/themes/cycle_infra/Cycle_barrier_squeeze.png' style='width:8em'>"
+                    }
+                }
+            },
+            "3": {
+                "render": "Maximumbreedte: {maxwidth:physical} m",
+                "question": "Hoe breed is de ruimte naast de barrière?"
+            },
+            "4": {
+                "render": "Ruimte tussen barrières (langs de lengte van de weg): {width:separation} m",
+                "question": "Hoeveel ruimte is er tussen de barrières (langs de lengte van de weg)?"
+            },
+            "5": {
+                "render": "Breedte van de opening: {width:opening} m",
+                "question": "Hoe breed is de smalste opening naast de barrières?"
+            },
+            "6": {
+                "question": "Hoeveel overlappen de barrières?"
+            }
+        }
+    },
     "bench": {
         "name": "Zitbanken",
         "title": {
@@ -436,6 +526,12 @@
                 "render": "Beheer door {operator}"
             },
             "3": {
+                "question": "Wat is het email-adres van de beheerder?"
+            },
+            "4": {
+                "question": "Wat is het telefoonnummer van de beheerder?"
+            },
+            "5": {
                 "question": "Wanneer is dit fietsherstelpunt open?",
                 "mappings": {
                     "0": {
@@ -446,7 +542,7 @@
                     }
                 }
             },
-            "4": {
+            "6": {
                 "question": "Heeft dit herstelpunt een speciale reparatieset voor je ketting?",
                 "mappings": {
                     "0": {
@@ -457,7 +553,7 @@
                     }
                 }
             },
-            "5": {
+            "7": {
                 "question": "Heeft dit herstelpunt een haak of standaard om je fiets op te hangen/zetten?",
                 "mappings": {
                     "0": {
@@ -468,7 +564,7 @@
                     }
                 }
             },
-            "6": {
+            "8": {
                 "question": "Werkt de fietspomp nog?",
                 "mappings": {
                     "0": {
@@ -479,7 +575,10 @@
                     }
                 }
             },
-            "7": {
+            "9": {
+                "render": "<a href='mailto:{email}?subject=Kapotte fietspomp&body=Geachte,%0D%0A%0D%0AGraag had ik u gemeld dat een fietspomp defect is. De fietspomp bevindt zich hier: https://mapcomplete.osm.be/cyclofix#{id}.'>Rapporteer deze fietspomp als kapot</a>"
+            },
+            "10": {
                 "question": "Welke ventielen werken er met de pomp?",
                 "render": "Deze pomp werkt met de volgende ventielen: {valves}",
                 "mappings": {
@@ -494,7 +593,7 @@
                     }
                 }
             },
-            "8": {
+            "11": {
                 "question": "Is dit een electrische fietspomp?",
                 "mappings": {
                     "0": {
@@ -505,7 +604,7 @@
                     }
                 }
             },
-            "9": {
+            "12": {
                 "question": "Heeft deze pomp een luchtdrukmeter?",
                 "mappings": {
                     "0": {
@@ -918,6 +1017,362 @@
             }
         }
     },
+    "cycleways_and_roads": {
+        "name": "Fietspaden, straten en wegen",
+        "title": {
+            "render": "Fietspaden",
+            "mappings": {
+                "0": {
+                    "then": "Fietsweg"
+                },
+                "1": {
+                    "then": "Fietssuggestiestrook"
+                },
+                "2": {
+                    "then": "Fietsstrook"
+                },
+                "3": {
+                    "then": "Fietsweg naast de weg"
+                },
+                "4": {
+                    "then": "Fietsstraat"
+                }
+            }
+        },
+        "tagRenderings": {
+            "0": {
+                "question": "Wat voor fietspad is hier?",
+                "mappings": {
+                    "0": {
+                        "then": "Er is een fietssuggestiestrook"
+                    },
+                    "1": {
+                        "then": "Er is een fietspad aangrenzend aan de weg (gescheiden met verf)"
+                    },
+                    "2": {
+                        "then": "Er is een fietspad (los van de weg), maar geen fietspad afzonderlijk getekend naast deze weg."
+                    },
+                    "3": {
+                        "then": "Er is een apart getekend fietspad."
+                    },
+                    "4": {
+                        "then": "Er is geen fietspad aanwezig"
+                    },
+                    "5": {
+                        "then": "Er is geen fietspad aanwezig"
+                    }
+                }
+            },
+            "1": {
+                "question": "Is deze weg verlicht?",
+                "mappings": {
+                    "0": {
+                        "then": "Deze weg is verlicht"
+                    },
+                    "1": {
+                        "then": "Deze weg is niet verlicht"
+                    },
+                    "2": {
+                        "then": "Deze weg is 's nachts verlicht"
+                    },
+                    "3": {
+                        "then": "Deze weg is 24/7 verlicht"
+                    }
+                }
+            },
+            "2": {
+                "question": "Is dit een fietsstraat?",
+                "mappings": {
+                    "0": {
+                        "then": "Dit is een fietsstraat, en dus een 30km/h zone"
+                    },
+                    "1": {
+                        "then": "Dit is een fietsstraat"
+                    },
+                    "2": {
+                        "then": "Dit is geen fietsstraat"
+                    }
+                }
+            },
+            "3": {
+                "render": "De maximumsnelheid op deze weg is {maxspeed} km/u",
+                "mappings": {
+                    "0": {
+                        "then": "De maximumsnelheid is 20 km/u"
+                    },
+                    "1": {
+                        "then": "De maximumsnelheid is 30 km/u"
+                    },
+                    "2": {
+                        "then": "De maximumsnelheid is 50 km/u"
+                    },
+                    "3": {
+                        "then": "De maximumsnelheid is 70 km/u"
+                    },
+                    "4": {
+                        "then": "De maximumsnelheid is 90 km/u"
+                    }
+                },
+                "question": "Wat is de maximumsnelheid in deze straat?"
+            },
+            "4": {
+                "render": "Dit fietspad is gemaakt van {cycleway:surface}",
+                "mappings": {
+                    "0": {
+                        "then": "Dit fietspad is onverhard"
+                    },
+                    "1": {
+                        "then": "Dit fietspad is geplaveid"
+                    },
+                    "2": {
+                        "then": "Dit fietspad is gemaakt van asfalt"
+                    },
+                    "3": {
+                        "then": "Dit fietspad is gemaakt van straatstenen"
+                    },
+                    "4": {
+                        "then": "Dit fietspad is gemaakt van beton"
+                    },
+                    "5": {
+                        "then": "Dit fietspad is gemaakt van kasseien (natuurlijk of verwerkt)"
+                    },
+                    "6": {
+                        "then": "Dit fietspad is gemaakt van ruwe, natuurlijke kasseien"
+                    },
+                    "7": {
+                        "then": "Dit fietspad is gemaakt van vlakke, rechthoekige kasseien"
+                    },
+                    "8": {
+                        "then": "Dit fietspad is gemaakt van hout"
+                    },
+                    "9": {
+                        "then": "Dit fietspad is gemaakt van grind"
+                    },
+                    "10": {
+                        "then": "Dit fietspad is gemaakt van fijn grind"
+                    },
+                    "11": {
+                        "then": "Dit fietspad is gemaakt van kiezelsteentjes"
+                    },
+                    "12": {
+                        "then": "Dit fietspad is gemaakt van aarde"
+                    }
+                },
+                "question": "Waaruit is het oppervlak van het fietspad van gemaakt?"
+            },
+            "5": {
+                "question": "Wat is de kwaliteit van dit fietspad?",
+                "mappings": {
+                    "0": {
+                        "then": "Geschikt voor fijne rollers: rollerblade, skateboard"
+                    },
+                    "1": {
+                        "then": "Geschikt voor fijne wielen: racefiets"
+                    },
+                    "2": {
+                        "then": "Geschikt voor normale wielen: stadsfiets, rolstoel, scooter"
+                    },
+                    "3": {
+                        "then": "Geschikt voor brede wielen: trekfiets, auto, rickshaw"
+                    },
+                    "4": {
+                        "then": "Geschikt voor voertuigen met hoge banden: lichte terreinwagen"
+                    },
+                    "5": {
+                        "then": "Geschikt voor terreinwagens: zware terreinwagen"
+                    },
+                    "6": {
+                        "then": "Geschikt voor gespecialiseerde terreinwagens: tractor, alleterreinwagen"
+                    },
+                    "7": {
+                        "then": "Niet geschikt voor voertuigen met wielen"
+                    }
+                }
+            },
+            "6": {
+                "render": "Deze weg is gemaakt van {surface}",
+                "mappings": {
+                    "0": {
+                        "then": "Dit fietspad is onverhard"
+                    },
+                    "1": {
+                        "then": "Dit fietspad is geplaveid"
+                    },
+                    "2": {
+                        "then": "Dit fietspad is gemaakt van asfalt"
+                    },
+                    "3": {
+                        "then": "Dit fietspad is gemaakt van straatstenen"
+                    },
+                    "4": {
+                        "then": "Dit fietspad is gemaakt van beton"
+                    },
+                    "5": {
+                        "then": "Dit fietspad is gemaakt van kasseien (natuurlijk of verwerkt)"
+                    },
+                    "6": {
+                        "then": "Dit fietspad is gemaakt van ruwe, natuurlijke kasseien"
+                    },
+                    "7": {
+                        "then": "Dit fietspad is gemaakt van vlakke, rechthoekige kasseien"
+                    },
+                    "8": {
+                        "then": "Dit fietspad is gemaakt van hout"
+                    },
+                    "9": {
+                        "then": "Dit fietspad is gemaakt van grind"
+                    },
+                    "10": {
+                        "then": "Dit fietspad is gemaakt van fijn grind"
+                    },
+                    "11": {
+                        "then": "Dit fietspad is gemaakt van kiezelsteentjes"
+                    },
+                    "12": {
+                        "then": "Dit fietspad is gemaakt van aarde"
+                    }
+                },
+                "question": "Waaruit is het oppervlak van de straat gemaakt?"
+            },
+            "7": {
+                "question": "Wat is de kwaliteit van deze straat?"
+            },
+            "8": {
+                "render": "De breedte van deze rijbaan in deze straat is <strong>{width:carriageway}m</strong>",
+                "question": "Hoe breed is de rijbaan in deze straat (in meters)?"
+            },
+            "9": {
+                "question": "Welk verkeersbord heeft dit fietspad?",
+                "mappings": {
+                    "0": {
+                        "then": "Verplicht fietspad <img src='./assets/themes/cycle_infra/Belgian_road_sign_D07.svg' style='width: 3em'>"
+                    },
+                    "1": {
+                        "then": "Verplicht fietspad (met onderbord)<br><img src='./assets/themes/cycle_infra/Belgian_road_sign_D07.svg' style='width: 3em'>"
+                    },
+                    "2": {
+                        "then": "Afgescheiden voet-/fietspad <img src='./assets/themes/cycle_infra/Belgian_road_sign_D09.svg' style='width: 3em'>"
+                    },
+                    "3": {
+                        "then": "Gedeeld voet-/fietspad <img src='./assets/themes/cycle_infra/Belgian_road_sign_D10.svg' style='width: 3em'>"
+                    },
+                    "4": {
+                        "then": "Geen verkeersbord aanwezig"
+                    }
+                }
+            },
+            "10": {
+                "question": "Welk verkeersbord heeft dit fietspad?",
+                "mappings": {
+                    "0": {
+                        "then": "Verplicht fietspad <img src='./assets/themes/cycle_infra/Belgian_road_sign_D07.svg' style='width: 3em'>"
+                    },
+                    "1": {
+                        "then": "Verplicht fietspad (met onderbord)<br><img src='./assets/themes/cycle_infra/Belgian_road_sign_D07.svg' style='width: 3em'>"
+                    },
+                    "2": {
+                        "then": "Afgescheiden voet-/fietspad <img src='./assets/themes/cycle_infra/Belgian_road_sign_D09.svg' style='width: 3em'>"
+                    },
+                    "3": {
+                        "then": "Gedeeld voet-/fietspad <img src='./assets/themes/cycle_infra/Belgian_road_sign_D10.svg' style='width: 3em'>"
+                    },
+                    "4": {
+                        "then": "Geen verkeersbord aanwezig"
+                    }
+                }
+            },
+            "11": {
+                "question": "Heeft het verkeersbord D7 (<img src='./assets/themes/cycle_infra/Belgian_road_sign_D07.svg' style='width: 1.5em'>) een onderbord?",
+                "mappings": {
+                    "0": {
+                        "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M6.svg' style='width: 3em'>"
+                    },
+                    "1": {
+                        "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M13.svg' style='width: 3em'>"
+                    },
+                    "2": {
+                        "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M14.svg' style='width: 3em'>"
+                    },
+                    "3": {
+                        "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M7.svg' style='width: 3em'>"
+                    },
+                    "4": {
+                        "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M15.svg' style='width: 3em'>"
+                    },
+                    "5": {
+                        "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M16.svg' style='width: 3em'>"
+                    },
+                    "6": {
+                        "then": "Geen onderbord aanwezig"
+                    }
+                }
+            },
+            "12": {
+                "question": "Heeft het verkeersbord D7 (<img src='./assets/themes/cycle_infra/Belgian_road_sign_D07.svg' style='width: 1.5em'>) een onderbord?",
+                "mappings": {
+                    "0": {
+                        "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M6.svg' style='width: 3em'>"
+                    },
+                    "1": {
+                        "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M13.svg' style='width: 3em'>"
+                    },
+                    "2": {
+                        "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M14.svg' style='width: 3em'>"
+                    },
+                    "3": {
+                        "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M7.svg' style='width: 3em'>"
+                    },
+                    "4": {
+                        "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M15.svg' style='width: 3em'>"
+                    },
+                    "5": {
+                        "then": "<img src='./assets/themes/cycle_infra/Belgian_traffic_sign_M16.svg' style='width: 3em'>"
+                    },
+                    "6": {
+                        "then": "Geen onderbord aanwezig"
+                    }
+                }
+            },
+            "13": {
+                "render": "De schrikafstand van dit fietspad is {cycleway:buffer} m",
+                "question": "Hoe breed is de ruimte tussen het fietspad en de weg?"
+            },
+            "14": {
+                "question": "Hoe is dit fietspad gescheiden van de weg?",
+                "mappings": {
+                    "0": {
+                        "then": "Dit fietspad is gescheiden van de weg met een onderbroken streep"
+                    },
+                    "1": {
+                        "then": "Dit fietspad is gescheiden van de weg met een doorgetrokken streep"
+                    },
+                    "2": {
+                        "then": "Dit fietspad is gescheiden van de weg met parkeervakken"
+                    },
+                    "3": {
+                        "then": "Dit fietspad is gescheiden van de weg met een stoeprand"
+                    }
+                }
+            },
+            "15": {
+                "question": "Hoe is dit fietspad gescheiden van de weg?",
+                "mappings": {
+                    "0": {
+                        "then": "Dit fietspad is gescheiden van de weg met een onderbroken streep"
+                    },
+                    "1": {
+                        "then": "Dit fietspad is gescheiden van de weg met een doorgetrokken streep"
+                    },
+                    "2": {
+                        "then": "Dit fietspad is gescheiden van de weg met parkeervakken"
+                    },
+                    "3": {
+                        "then": "Dit fietspad is gescheiden van de weg met een stoeprand"
+                    }
+                }
+            }
+        }
+    },
     "defibrillator": {
         "name": "Defibrillatoren",
         "title": {
@@ -996,23 +1451,6 @@
             "7": {
                 "render": "<i>Meer informatie over de locatie (in het Frans):</i><br/>{defibrillator:location:fr}",
                 "question": "Gelieve meer informatie te geven over de exacte locatie van de defibrillator (in het Frans)"
-            },
-            "8": {
-                "question": "Is deze defibrillator rolstoeltoegankelijk?",
-                "mappings": {
-                    "0": {
-                        "then": "Deze defibrillator is speciaal aangepast voor gebruikers van een rolstoel"
-                    },
-                    "1": {
-                        "then": "Deze defibrillator is vlot bereikbaar met een rolstoel"
-                    },
-                    "2": {
-                        "then": "Je kan er raken met een rolstoel, maar het is niet makkelijk"
-                    },
-                    "3": {
-                        "then": "Niet rolstoeltoegankelijk"
-                    }
-                }
             },
             "9": {
                 "render": "Officieel identificatienummer van het toestel: <i>{ref}</i>",
@@ -1097,6 +1535,203 @@
             },
             "3": {
                 "render": "<a href='#{_closest_other_drinking_water_id}'>Er bevindt zich een ander drinkwaterpunt op {_closest_other_drinking_water_distance} meter</a>"
+            }
+        }
+    },
+    "food": {
+        "name": "Eetgelegenheden",
+        "presets": {
+            "0": {
+                "title": "restaurant",
+                "description": "Een eetgegelegenheid waar je aan tafel wordt bediend"
+            },
+            "1": {
+                "title": "fastfood-zaak",
+                "description": "Een zaak waar je snel bediend wordt, vaak met de focus op afhalen. Zitgelegenheid is eerder beperkt (of zelfs afwezig)"
+            },
+            "2": {
+                "title": "frituur",
+                "description": "Een fastfood-zaak waar je frieten koopt"
+            }
+        },
+        "title": {
+            "render": "Eetgelegenheid",
+            "mappings": {
+                "0": {
+                    "then": "Restaurant <i>{name}</i>"
+                },
+                "1": {
+                    "then": "Fastfood-zaak <i>{name}</i>"
+                }
+            }
+        },
+        "tagRenderings": {
+            "1": {
+                "question": "Wat is de naam van deze eetgelegenheid?",
+                "render": "De naam van deze eetgelegeheid is {name}"
+            },
+            "2": {
+                "question": "Wat voor soort zaak is dit?",
+                "mappings": {
+                    "0": {
+                        "then": "Dit is een <b>fastfood-zaak</b>. De focus ligt op snelle bediening, zitplaatsen zijn vaak beperkt en functioneel"
+                    },
+                    "1": {
+                        "then": "Dit is een <b>restaurant</b>. De focus ligt op een aangename ervaring waar je aan tafel wordt bediend"
+                    }
+                }
+            },
+            "8": {
+                "question": "Welk soort gerechten worden hier geserveerd?",
+                "render": "Deze plaats serveert vooral {cuisine}",
+                "mappings": {
+                    "0": {
+                        "then": "Dit is een pizzeria"
+                    },
+                    "1": {
+                        "then": "Dit is een frituur"
+                    },
+                    "2": {
+                        "then": "Dit is een pastazaak"
+                    },
+                    "3": {
+                        "then": "Dit is een kebabzaak"
+                    },
+                    "4": {
+                        "then": "Dit is een broodjeszaak"
+                    },
+                    "5": {
+                        "then": "Dit is een hamburgerrestaurant"
+                    },
+                    "6": {
+                        "then": "Dit is een sushirestaurant"
+                    },
+                    "7": {
+                        "then": "Dit is een koffiezaak"
+                    },
+                    "8": {
+                        "then": "Dit is een Italiaans restaurant (dat meer dan enkel pasta of pizza verkoopt)"
+                    },
+                    "9": {
+                        "then": "Dit is een Frans restaurant"
+                    },
+                    "10": {
+                        "then": "Dit is een Chinees restaurant"
+                    },
+                    "11": {
+                        "then": "Dit is een Grieks restaurant"
+                    },
+                    "12": {
+                        "then": "Dit is een Indisch restaurant"
+                    },
+                    "13": {
+                        "then": "Dit is een Turks restaurant (dat meer dan enkel kebab verkoopt)"
+                    },
+                    "14": {
+                        "then": "Dit is een Thaïs restaurant"
+                    }
+                }
+            },
+            "9": {
+                "question": "Biedt deze zaak een afhaalmogelijkheid aan?",
+                "mappings": {
+                    "0": {
+                        "then": "Hier is enkel afhaal mogelijk"
+                    },
+                    "1": {
+                        "then": "Eten kan hier afgehaald worden"
+                    },
+                    "2": {
+                        "then": "Hier is geen afhaalmogelijkheid"
+                    }
+                }
+            },
+            "10": {
+                "question": "Heeft deze eetgelegenheid een vegetarische optie?",
+                "mappings": {
+                    "0": {
+                        "then": "Geen vegetarische opties beschikbaar"
+                    },
+                    "1": {
+                        "then": "Beperkte vegetarische opties zijn beschikbaar"
+                    },
+                    "2": {
+                        "then": "Vegetarische opties zijn beschikbaar"
+                    },
+                    "3": {
+                        "then": "Enkel vegetarische opties zijn beschikbaar"
+                    }
+                }
+            },
+            "11": {
+                "question": "Heeft deze eetgelegenheid een veganistische optie?",
+                "mappings": {
+                    "0": {
+                        "then": "Geen veganistische opties beschikbaar"
+                    },
+                    "1": {
+                        "then": "Beperkte veganistische opties zijn beschikbaar"
+                    },
+                    "2": {
+                        "then": "Veganistische opties zijn beschikbaar"
+                    },
+                    "3": {
+                        "then": "Enkel veganistische opties zijn beschikbaar"
+                    }
+                }
+            },
+            "12": {
+                "question": "Heeft deze frituur vegetarische snacks?",
+                "mappings": {
+                    "0": {
+                        "then": "Er zijn vegetarische snacks aanwezig"
+                    },
+                    "1": {
+                        "then": "Slechts enkele vegetarische snacks"
+                    },
+                    "2": {
+                        "then": "Geen vegetarische snacks beschikbaar"
+                    }
+                }
+            },
+            "13": {
+                "question": "Heeft deze frituur veganistische snacks?",
+                "mappings": {
+                    "0": {
+                        "then": "Er zijn veganistische snacks aanwezig"
+                    },
+                    "1": {
+                        "then": "Slechts enkele veganistische snacks"
+                    },
+                    "2": {
+                        "then": "Geen veganistische snacks beschikbaar"
+                    }
+                }
+            },
+            "14": {
+                "question": "Bakt deze frituur met dierlijk vet of met plantaardige olie?",
+                "mappings": {
+                    "0": {
+                        "then": "Plantaardige olie"
+                    },
+                    "1": {
+                        "then": "Dierlijk vet"
+                    }
+                }
+            },
+            "15": {
+                "question": "Als je je eigen container (bv. kookpot of kleine potjes voor saus) meeneemt, gebruikt de frituur deze dan om je bestelling in te doen?",
+                "mappings": {
+                    "0": {
+                        "then": "Je mag je <b>eigen containers</b> meenemen om je bestelling in mee te nemen en zo minder afval te maken"
+                    },
+                    "1": {
+                        "then": "Je mag <b>geen</b> eigen containers meenemen om je bestelling in mee te nemen"
+                    },
+                    "2": {
+                        "then": "Je <b>moet</b> je eigen containers meenemen om je bestelling in mee te nemen."
+                    }
+                }
             }
         }
     },
@@ -2363,12 +2998,6 @@
                         "then": "<img src=\"./assets/themes/buurtnatuur/Natuurpunt.jpg\" style=\"width:1.5em\">Dit gebied wordt beheerd door {operator}"
                     }
                 }
-            }
-        },
-        "presets": {
-            "0": {
-                "title": "Paden",
-                "description": "Voeg een ontbrekend, erkend pad toe."
             }
         }
     }

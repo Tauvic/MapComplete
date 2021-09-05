@@ -62,7 +62,10 @@
   },
   "general": {
     "pdf": {
-      "attr": "Generated with MapComplete.osm.be - map data © OpenStreetMap Contributors, reusable under ODbL"
+      "generatedWith": "Generated with MapComplete.osm.be",
+      "attr": "Map data © OpenStreetMap Contributors, reusable under ODbL",
+      "attrBackground": "Background layer: {background}",
+      "versionInfo": "v{version} - generated on {date}"
     },
     "loginWithOpenStreetMap": "Login with OpenStreetMap",
     "welcomeBack": "You are logged in, welcome back!",
@@ -83,6 +86,7 @@
     "number": "number",
     "osmLinkTooltip": "See this object on OpenStreetMap for history and more editing options",
     "add": {
+      "addNewMapLabel": "Add new item",
       "addNew": "Add a new {category} here",
       "presetInfo": "The new POI will have {tags}",
       "warnVisibleForEveryone": "Your addition will be visible for everyone",
@@ -117,7 +121,7 @@
     "sharescreen": {
       "intro": "<h3>Share this map</h3> Share this map by copying the link below and sending it to friends and family:",
       "addToHomeScreen": "<h3>Add to your home screen</h3>You can easily add this website to your smartphone home screen for a native feel. Click the 'add to home screen button' in the URL bar to do this.",
-      "embedIntro": "<h3>Embed on your website</h3>Please, embed this map into your website. <br/>We encourage you to do it - you don't even have to ask permission. <br/> It is free, and always will be. The more people using this, the more valuable it becomes.",
+      "embedIntro": "<h3>Embed on your website</h3>Please, embed this map into your website. <br/>We encourage you to do it - you don't even have to ask permission. <br/> It is free, and always will be. The more people are using this, the more valuable it becomes.",
       "copiedToClipboard": "Link copied to clipboard",
       "thanksForSharing": "Thanks for sharing!",
       "editThisTheme": "Edit this theme",
@@ -163,9 +167,10 @@
     "download": {
       "title": "Download visible data",
       "downloadAsPdf": "Download a PDF of the current map",
+      "downloadAsPdfHelper": "Ideal to print the current map",
       "downloadGeojson": "Download visible data as geojson",
-      "downloadGeoJsonHelper": "Compatible with QGIS, OsmAnd, ArcGIS, ESRI, ...",
-      "downloadCSV": "Download as CSV",
+      "downloadGeoJsonHelper": "Compatible with QGIS, ArcGIS, ESRI, ...",
+      "downloadCSV": "Download visible data as CSV",
       "downloadCSVHelper": "Compatible with LibreOffice Calc, Excel, ...",
       "includeMetaData": "Include metadata (last editor, calculated values, ...)",
       "licenseInfo": "<h3>Copyright notice</h3>The provided is available under ODbL. Reusing this data is free for any purpose, but <ul><li>the attribution <b>© OpenStreetMap contributors</b> is required</li><li>Any change to this data must be republished under the same license</li></ul> Please read the full <a href='https://www.openstreetmap.org/copyright' target='_blank'>copyright notice</a> for details",

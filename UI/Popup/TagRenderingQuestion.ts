@@ -1,6 +1,5 @@
 import {UIEventSource} from "../../Logic/UIEventSource";
 import Combine from "../Base/Combine";
-import TagRenderingConfig from "../../Customizations/JSON/TagRenderingConfig";
 import {InputElement} from "../Input/InputElement";
 import ValidatedTextField from "../Input/ValidatedTextField";
 import {FixedInputElement} from "../Input/FixedInputElement";
@@ -23,9 +22,10 @@ import {And} from "../../Logic/Tags/And";
 import {TagUtils} from "../../Logic/Tags/TagUtils";
 import BaseUIElement from "../BaseUIElement";
 import {DropDown} from "../Input/DropDown";
-import {Unit} from "../../Customizations/JSON/Denomination";
 import InputElementWrapper from "../Input/InputElementWrapper";
 import ChangeTagAction from "../../Logic/Osm/Actions/ChangeTagAction";
+import TagRenderingConfig from "../../Models/ThemeConfig/TagRenderingConfig";
+import {Unit} from "../../Models/Unit";
 
 /**
  * Shows the question element.
@@ -54,6 +54,12 @@ export default class TagRenderingQuestion extends Combine {
 
 
         const inputElement: InputElement<TagsFilter> = TagRenderingQuestion.GenerateInputElement(configuration, applicableUnit, tags)
+
+        if(inputElement === undefined){
+            console.trace("MultiAnswer failed", configuration)
+            const inputElement0: InputElement<TagsFilter> = TagRenderingQuestion.GenerateInputElement(configuration, applicableUnit, tags)
+
+        }
         const save = () => {
             const selection = inputElement.GetValue().data;
             if (selection) {
@@ -177,6 +183,7 @@ export default class TagRenderingQuestion extends Combine {
         configuration: TagRenderingConfig,
         elements: InputElement<TagsFilter>[], freeformField: InputElement<TagsFilter>, ifNotSelected: TagsFilter[]): InputElement<TagsFilter> {
         const checkBoxes = new CheckBoxes(elements);
+        
         const inputEl = new InputElementMap<number[], TagsFilter>(
             checkBoxes,
             (t0, t1) => {
@@ -248,7 +255,6 @@ export default class TagRenderingQuestion extends Combine {
             },
             elements.map(el => el.GetValue())
         );
-
 
         freeformField?.GetValue()?.addCallbackAndRun(value => {
             // The list of indices of the selected elements

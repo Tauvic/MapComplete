@@ -1,10 +1,11 @@
 import {lstatSync, readdirSync, readFileSync} from "fs";
 import {Utils} from "../Utils";
+
 Utils.runningFromConsole = true
 import * as https from "https";
-import {LayerConfigJson} from "../Customizations/JSON/LayerConfigJson";
-import {LayoutConfigJson} from "../Customizations/JSON/LayoutConfigJson";
 import * as fs from "fs";
+import {LayoutConfigJson} from "../Models/ThemeConfig/Json/LayoutConfigJson";
+import {LayerConfigJson} from "../Models/ThemeConfig/Json/LayerConfigJson";
 
 
 export default class ScriptUtils {
@@ -48,19 +49,22 @@ export default class ScriptUtils {
         })
     }
 
-    public static DownloadJSON(url): Promise<any> {
+    public static DownloadJSON(url, options?: {
+        headers: any
+    }): Promise<any> {
         return new Promise((resolve, reject) => {
             try {
+
+                const headers = options?.headers ?? {}
+                headers.accept = "application/json"
 
                 const urlObj = new URL(url)
                 https.get({
                     host: urlObj.host,
                     path: urlObj.pathname + urlObj.search,
-                    
+
                     port: urlObj.port,
-                    headers: {
-                        "accept": "application/json"
-                    }
+                    headers: headers
                 }, (res) => {
                     const parts: string[] = []
                     res.setEncoding('utf8');
@@ -85,9 +89,9 @@ export default class ScriptUtils {
         })
 
     }
-    
+
     public static erasableLog(...text) {
-        process.stdout.write("\r "+text.join(" ")+"                \r")
+        process.stdout.write("\r " + text.join(" ") + "                \r")
     }
 
     public static sleep(ms) {
@@ -104,14 +108,15 @@ export default class ScriptUtils {
     public static getLayerFiles(): { parsed: LayerConfigJson, path: string }[] {
         return ScriptUtils.readDirRecSync("./assets/layers")
             .filter(path => path.indexOf(".json") > 0)
+            .filter(path => path.indexOf(".proto.json") < 0)
             .filter(path => path.indexOf("license_info.json") < 0)
             .map(path => {
                 try {
                     const contents = readFileSync(path, "UTF8")
-                    if(contents === ""){
-                        throw "The file "+path+" is empty, did you properly save?"
+                    if (contents === "") {
+                        throw "The file " + path + " is empty, did you properly save?"
                     }
-                    
+
                     const parsed = JSON.parse(contents);
                     return {parsed: parsed, path: path}
                 } catch (e) {
@@ -127,8 +132,8 @@ export default class ScriptUtils {
             .map(path => {
                 try {
                     const contents = readFileSync(path, "UTF8");
-                    if(contents === ""){
-                        throw "The file "+path+" is empty, did you properly save?"
+                    if (contents === "") {
+                        throw "The file " + path + " is empty, did you properly save?"
                     }
                     const parsed = JSON.parse(contents);
                     return {parsed: parsed, path: path}
