@@ -328,8 +328,7 @@ export default class LayerConfig {
             this.deletion = new DeleteConfig(json.deletion, `${context}.deletion`);
         }
 
-        if (json["leftRightDistinctions"] !== undefined) {
-            // this.leftRightDistinctions = FromJSON.Tag(json["leftRightDistinctions"], context + ".leftRightDistinctions");
+        if (json.leftRightDistinctions !== undefined) {
             this.leftRightDistinctions = json["leftRightDistinctions"]
         }
 
