@@ -4,8 +4,6 @@
 import {UIEventSource} from "../UIEventSource";
 import Hash from "./Hash";
 import {Utils} from "../../Utils";
-import Title from "../../UI/Base/Title";
-import Combine from "../../UI/Base/Combine";
 
 export class QueryParameters {
 
@@ -13,29 +11,10 @@ export class QueryParameters {
     private static _wasInitialized: Set<string> = new Set()
     private static knownSources = {};
     private static initialized = false;
-    private static defaults = {}
+    static defaults = {}
 
-    private static documentation = {}
-    private static QueryParamDocsIntro = "\n" +
-        "URL-parameters and URL-hash\n" +
-        "============================\n" +
-        "\n" +
-        "This document gives an overview of which URL-parameters can be used to influence MapComplete.\n" +
-        "\n" +
-        "What is a URL parameter?\n" +
-        "------------------------\n" +
-        "\n" +
-        "URL-parameters are extra parts of the URL used to set the state.\n" +
-        "\n" +
-        "For example, if the url is `https://mapcomplete.osm.be/cyclofix?lat=51.0&lon=4.3&z=5&test=true#node/1234`,\n" +
-        "the URL-parameters are stated in the part between the `?` and the `#`. There are multiple, all separated by `&`, namely:\n" +
-        "\n" +
-        "- The url-parameter `lat` is `51.0` in this instance\n" +
-        "- The url-parameter `lon` is `4.3` in this instance\n" +
-        "- The url-parameter `z` is `5` in this instance\n" +
-        "- The url-parameter `test` is `true` in this instance\n" +
-        "\n" +
-        "Finally, the URL-hash is the part after the `#`. It is `node/1234` in this case."
+    static documentation = {}
+
 
     public static GetQueryParameter(key: string, deflt: string, documentation?: string): UIEventSource<string> {
         if (!this.initialized) {
@@ -53,20 +32,6 @@ export class QueryParameters {
         QueryParameters.knownSources[key] = source;
         source.addCallback(() => QueryParameters.Serialize())
         return source;
-    }
-
-    public static GenerateQueryParameterDocs(): string {
-        const docs = [QueryParameters.QueryParamDocsIntro];
-        for (const key in QueryParameters.documentation) {
-            const c = new Combine([
-                new Title(key, 2),
-                QueryParameters.documentation[key],
-                QueryParameters.defaults[key] === undefined ? "No default value set" : `The default value is _${QueryParameters.defaults[key]}_`
-
-            ])
-            docs.push(c.AsMarkdown())
-        }
-        return docs.join("\n\n");
     }
 
     private static addOrder(key) {
@@ -99,10 +64,7 @@ export class QueryParameters {
                 QueryParameters.knownSources[key] = source;
             }
         }
-
-        window["mapcomplete_query_parameter_overview"] = () => {
-            console.log(QueryParameters.GenerateQueryParameterDocs())
-        }
+        
     }
     
     public static wasInitialized(key: string) : boolean{

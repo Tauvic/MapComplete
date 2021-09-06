@@ -35,8 +35,10 @@ export class TagUtils {
     }
 
     /**
-     * Adds for the keys specified in leftRightDistinctions a left and a right version if not yet specified
+     * Rewrites the properties to have a left and a right version for every specified key
      * e.g. {"sidewalk": "yes"} -> {"sidewalk:left": "yes", "sidewalk:right": "yes"} (if leftRightDistinctions contains 'sidewalk')
+     * or:
+     * {"cycleway:surface" = "asphalt"} becomes {"cycleway:left:surface"=asphalt} and {"cycleway:right:surface"=asphalt}
      * @param props Json containing all properties
      */
     public static addLeftRightTags(leftRightDistinctions: string[], props: any) {
@@ -62,7 +64,7 @@ export class TagUtils {
                     newProps[rightKey] = value;
 
                 } else {
-                    // No direction specifier already added, so we kan add our own (if left and right isn't specified yet)
+                    // No direction specifier already added, so we can add our own (if left and right isn't specified yet)
                     const leftKey =TagUtils. getSideVersionOfKey(prop, "left")
                     const rightKey =TagUtils.  getSideVersionOfKey(prop, "right")
 
